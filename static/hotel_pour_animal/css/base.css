@@ -1,0 +1,82 @@
+body{
+  margin: 0;
+  height: 100vh;
+  background: linear-gradient(to bottom right, #332998, #ccdbde);
+}
+
+
+
+nav ul{
+  list-style-type: none;
+  padding: 0;
+}
+
+nav ul li{
+  font-size: 20px;
+  font-family: "JetBrains Mono Light";
+  background: linear-gradient(to bottom left, lightpink, #ccdbde );
+  border:  thick double olivedrab;
+  /*overflow: hidden;*/
+  margin: 0.5em;
+  cursor: pointer;
+  border-radius: 20px;
+  box-shadow: 10px 5px 5px rgba(45, 20, 45, 0.4);
+  height: 60px;
+
+}
+
+/*nav ul li span{*/
+/*  background-color: red;*/
+/*}*/
+
+nav ul li:hover{
+  font-size: 40px;
+  transition-duration: 1.2s;
+  background: linear-gradient(to bottom left, cornsilk, beige );
+  height: 80px;
+}
+
+/*nav ul li:hover::before {*/
+/*	transform: scale(7);*/
+/*}*/
+
+nav ul li a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.flex-parent-element {
+  display: flex;
+}
+
+.flex-child-element {
+  flex: 0.8;
+  margin-right: 150px;
+
+}
+
+.flex-child-element:first-child {
+  flex: 0.2;
+}
+
+.flex-child-element.premier{
+  border-radius: 30px ;
+}
+
+/*tableau hotel_pour_animal/personnes*/
+
+table, th, td {
+  border: 1px solid black;
+}
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+th {
+  height: 70px;
+}
+
+.titre_tableau_de_bord{
+  margin-top: 100px;
+  margin-bottom: 100px;
+}

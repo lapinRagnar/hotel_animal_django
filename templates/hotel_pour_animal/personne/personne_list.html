@@ -1,50 +1,45 @@
 {% extends 'hotel_pour_animal/base.html' %}
+{% load static %}
+
 
 {% block content %}
+    <h1 class="titre_tableau_de_bord">TABLEAU DE BORD</h1>
+    <table>
+      <tr>
+        <th scope="col">Nom</th>
+        <th scope="col">Prénom</th>
+        <th scope="col">Adresse</th>
+        <th scope="col">Téléphone</th>
+      </tr>
 
-    <div class="table-responsive-sm p4">
-        <div class="table table-sm">
+      {% for personne in personne_list %}
+        <tr class="table-info">
+            <td>{{ personne.nom }}</td>
+            <td>{{ personne.prenom }}</td>
+            <td>{{ personne.get_adresse_complete }}</td>
+            <td>{{ personne.telephone }}</td>
 
-            <thead>
-                <tr>
-                    <th scope="col">Nom</th>
-                    <th scope="col">Prénom</th>
-                    <th scope="col">Adresse</th>
-                    <th scope="col">Téléphone</th>
-                </tr>
-            </thead>
+        </tr>
+       {% endfor %}
 
-            <tbody>
+    </table>
 
-                <tr class="table-info">
-                    {% for personne in personne_list %}
-                        <td>{{ personne.nom }}</td>
-                        <td>{{ personne.prenom }}</td>
-                        <td>{{ personne.get_adresse_complete }}</td>
-                        <td>{{ personne.telephone }}</td>
 
-                    {% endfor %}
-                </tr>
+    <div class="pagination">
+        {% if personne_list.has_previous %}
+            <a href="{% url 'personnes'%}?page={{ personne_list.previous_page_number }} ">Précedente</a>
+        {% endif %}
 
-            </tbody>
+        <span class="current">
+            Page {{ personne_list.number }} sur {{ personne_list.paginator.num_pages }}
+        </span>
 
-        </div>
-
-        <div class="pagination">
-            {% if personne_list.has_previous %}
-                <a href="{% url 'personnes'%}?page={{ personne_list.previous_page_number }} ">Précedente</a>
-            {% endif %}
-
-            <span class="current">
-                Page {{ personne_list.number }} sur {{ personne_list.paginator.num_pages }}
-            </span>
-
-            {% if personne_list.has_next %}
-                <a href="{% url 'personnes' %}?page={{ personne_list.next_page_number }}">Suivante</a>
-            {% endif %}
-
-        </div>
+        {% if personne_list.has_next %}
+            <a href="{% url 'personnes' %}?page={{ personne_list.next_page_number }}">Suivante</a>
+        {% endif %}
 
     </div>
+
+
 
 {% endblock %}

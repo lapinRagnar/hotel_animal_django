@@ -15,9 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from hotel_pour_animal.views.home import index
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('hotel_pour_animal', include('hotel_pour_animal.urls')),
+    path('', index, name='home'),
+    path('hotel_pour_animal/', include('hotel_pour_animal.urls')),
 
 ]
