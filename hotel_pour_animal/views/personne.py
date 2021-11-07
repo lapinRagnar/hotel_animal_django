@@ -1,7 +1,10 @@
 from django.core.paginator import Paginator, EmptyPage
 from django.shortcuts import render
+from django.urls import reverse_lazy
+from django.views.generic import CreateView, UpdateView
 
 from hotel_pour_animal.models.personne import Personne
+from hotel_pour_animal.forms.personne import PersonneForm
 
 
 def personne_list(request):
@@ -24,4 +27,23 @@ def personne_list(request):
         personne_list = paginator.page(paginator.num_pages)
 
     return render(request, 'hotel_pour_animal/personne/personne_list.html', locals())
+
+
+class CreatePerson(CreateView):
+    model = Personne
+    form_class = PersonneForm
+    template_name = 'hotel_pour_animal/personne/personne_form.html'
+
+    def get_success_url(self):
+        return reverse_lazy('detail_personne', kwargs={'pk': self.object.id})
+
+
+class UpdatePerson(UpdateView):
+    model = Personne
+    form_class = PersonneForm
+    template_name = 'hotel_pour_animal/personne/personne_form.html'
+
+    def get_success_url(self):
+        return reverse_lazy('detail_personne', kwargs={'pk': self.object.id})
+
 

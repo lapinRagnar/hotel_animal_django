@@ -14,9 +14,9 @@
 
       {% for personne in personne_list %}
         <tr class="table-info">
-            <td>{{ personne.nom }}</td>
+            <td><a href="{% url 'detail_personne' personne.id %}">{{ personne.nom }}</a></td>
             <td>{{ personne.prenom }}</td>
-            <td>{{ personne.get_adresse_complete }}</td>
+            <td>{{ personne.get_adresse_complete_str }}</td>
             <td>{{ personne.telephone }}</td>
 
         </tr>
@@ -38,6 +38,10 @@
             <a href="{% url 'personnes' %}?page={{ personne_list.next_page_number }}">Suivante</a>
         {% endif %}
 
+    </div>
+
+    <div class="text-right">
+        <a href="{% url 'create_personne' %}" class="btn btn-info">Ajouter une personne</a>
     </div>
 
 

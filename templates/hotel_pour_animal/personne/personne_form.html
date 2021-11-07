@@ -1,0 +1,32 @@
+
+{% extends 'hotel_pour_animal/base.html' %}
+
+{% block content %}
+
+    {% if object %}
+        <h3>Modification de {{ object.prenom }} {{ object.nom }} </h3>
+    {% else %}
+        <h3>Créer un personne</h3>
+    {% endif %}
+
+    <form action="" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <div class="col bouton">
+            <input type="submit" class="btn btn-info" name="modifier" value="modifier">
+        </div>
+
+        <div class="row">
+            <div class="col">
+                {% if object %}
+                    <a href="{% url 'detail_personne' object.id %}" class="btn btn-secondary">Afficher</a>
+                {% else %}
+                    <a href="{% url 'personnes' %}" class="btn btn-secondary">Annuler</a>
+                {% endif %}
+            </div>
+        </div>
+
+
+    </form>
+
+{% endblock %}
