@@ -1,0 +1,44 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>S'enregistrer</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{% static '/hotel_pour_animal/css/base.css' %}">
+    <script src="https://kit.fontawesome.com/5a429f7869.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+    <div id="login">
+        <h3 class="text-center text-white pt-5">Hotel privé pour animaux</h3>
+        <div class="container">
+            <div class="row justify-content-center align-item-center" id="login-row">
+                <div class="col-md-6" id="login-column">
+                    <div class="col-md-12" id="login-box">
+                        <form action="" method="post" id="login-form" class="form">
+                            {% csrf_token %}
+                            <h3 class="text-center text-info">Connexion</h3>
+                            <div class="form-group">
+                                <label for="{{ form.username.id_for_label }}" class="text-info">{{ form.username.label_tag }}</label><br>
+                                <input type="text" name="{{ form.username.html_name }}" id="{{ form.username.id_for_label }}" class="form-control" >
+                            </div>
+
+                            <div class="form-group">
+                                <label for="{{ form.password.id_for_label }}" class="text-info">{{ form.password.label_tag }}</label><br>
+                                <input type="password"  name="{{ form.password.html_name }}" id="{{ form.password.id_for_label }}" class="form-control" >
+                            </div>
+
+                            <div class="form-group bouton_login">
+                                <button class="btn btn-info">Connexion</button>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

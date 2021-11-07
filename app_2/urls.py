@@ -14,12 +14,19 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
+from django.contrib.staticfiles.storage import staticfiles_storage
 from django.urls import path, include
+from django.views.generic import RedirectView
+from django.conf import settings
+from django.conf.urls.static import static
+
 from hotel_pour_animal.views.home import index
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index, name='home'),
     path('hotel_pour_animal/', include('hotel_pour_animal.urls')),
+    path('accounts/', include('django.contrib.auth.urls')),
+    path('favicon.ico', RedirectView.as_view(url=staticfiles_storage.url('img/favicon.ico')))
 
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

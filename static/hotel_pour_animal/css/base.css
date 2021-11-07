@@ -14,15 +14,21 @@ nav ul{
 nav ul li{
   font-size: 20px;
   font-family: "JetBrains Mono Light";
-  background: linear-gradient(to bottom left, lightpink, #ccdbde );
+  background: linear-gradient(to bottom left, #d3cb6d, #ccdbde );
   border:  thick double olivedrab;
   /*overflow: hidden;*/
-  margin: 0.5em;
+  /*margin: 0.5em;*/
+  margin-top: 20px;
+  margin-bottom: 10px;
   cursor: pointer;
-  border-radius: 20px;
+  border-radius: 10px;
   box-shadow: 10px 5px 5px rgba(45, 20, 45, 0.4);
-  height: 60px;
+  height: 50px;
 
+}
+
+nav ul h2{
+  margin-top: 10px;
 }
 
 /*nav ul li span{*/
@@ -99,7 +105,7 @@ table tr td a{
 
 
 .card{
-  margin-top: 100px;
+  margin-top: 300px;
 }
 .card-header {
   display: flex;
@@ -117,7 +123,7 @@ table tr td a{
 
 form p label{
   padding-right: 70px;
-  width: 100px;
+  width: 300px;
 }
 
 form p label input{
@@ -127,5 +133,12 @@ form p label input{
 form .col.bouton{
   margin-top: 50px;
   margin-bottom: 15px;
+}
+
+
+/*login*/
+
+.bouton_login{
+  margin-top: 50px;
 }
 

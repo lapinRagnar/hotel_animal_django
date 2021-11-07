@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.urls import path
 from django.views.generic import DetailView
 
@@ -13,10 +14,10 @@ urlpatterns = [
     path('personnes', personne.personne_list, name='personnes'),
     path('personnes/create', personne.CreatePerson.as_view(), name='create_personne'),
     path('personnes/update/<int:pk>/', personne.UpdatePerson.as_view(), name='update_personne'),
-    path('personnes/<int:pk>/', DetailView.as_view(
+    path('personnes/<int:pk>/', login_required(DetailView.as_view(
         model=Personne,
         template_name="hotel_pour_animal/personne/personne_detail.html"
-    ), name='detail_personne')
+    )), name='detail_personne')
 
 
 ]

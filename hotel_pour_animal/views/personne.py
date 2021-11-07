@@ -1,3 +1,5 @@
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.paginator import Paginator, EmptyPage
 from django.shortcuts import render
 from django.urls import reverse_lazy
@@ -7,6 +9,9 @@ from hotel_pour_animal.models.personne import Personne
 from hotel_pour_animal.forms.personne import PersonneForm
 
 
+
+
+@login_required
 def personne_list(request):
     selected = 'personnes'
     personne_list = Personne.objects.all()
@@ -29,7 +34,7 @@ def personne_list(request):
     return render(request, 'hotel_pour_animal/personne/personne_list.html', locals())
 
 
-class CreatePerson(CreateView):
+class CreatePerson(CreateView, LoginRequiredMixin):
     model = Personne
     form_class = PersonneForm
     template_name = 'hotel_pour_animal/personne/personne_form.html'
@@ -38,7 +43,7 @@ class CreatePerson(CreateView):
         return reverse_lazy('detail_personne', kwargs={'pk': self.object.id})
 
 
-class UpdatePerson(UpdateView):
+class UpdatePerson(UpdateView, LoginRequiredMixin):
     model = Personne
     form_class = PersonneForm
     template_name = 'hotel_pour_animal/personne/personne_form.html'
