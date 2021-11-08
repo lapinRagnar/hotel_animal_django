@@ -85,6 +85,7 @@ th {margin-top: 50px;
 .titre_tableau_de_bord{
   margin-top: 10px;
   margin-bottom: 10px;
+  border-bottom: 20px solid rgba(130, 178, 119, 0.49);
 }
 
 table tr td a{
@@ -142,3 +143,12 @@ form .col.bouton{
   margin-top: 50px;
 }
 
+
+/*Gestion des animaux*/
+
+.titre_liste_des_animaux{
+  margin-left: 20px;
+  margin-top: 50px;
+  margin-bottom: 60px;
+  border-bottom: 20px solid rgba(62, 155, 88, 0.6);
+}

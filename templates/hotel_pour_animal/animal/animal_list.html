@@ -1,0 +1,59 @@
+{% extends 'hotel_pour_animal/base.html' %}
+
+{% load tag %}
+
+{% block content %}
+
+    <h1 class="titre_liste_des_animaux">LISTE DES ANIMAUX</h1>
+
+    <div class="table-responsive-sm p-4">
+        <table class="table table-sm">
+            <thead>
+                <tr>
+                    <th scope="col">Nom</th>
+                    <th scope="col">Type</th>
+                    <th scope="col">Emplacemenet</th>
+                    <th scope="col">Propriétaire</th>
+                    <th scope="col">Vacciné</th>
+                    <th scope="col">Stérilisé</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for animal in animal_list %}
+                    <tr class="table-info">
+                        <td><a href="">{{ animal.nom }}</a></td>
+                        <td>{{ animal.get_type_animal_display }}</td>
+                        <td>{{ animal.get_emplacement_display }}</td>
+                        <td>{{ animal.proprietaire|default:'' }}</td>
+                        <td>{{ animal.get_vaccin_str }}</td>
+                        <td>{{ animal.get_sterilisation_str }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+
+        </table>
+
+        <div class="pagination">
+            {% if animal_list.has_previous %}
+                <a href="?{% param_replace page=animal_list.previous_page_number %}">Precedente</a>
+            {% endif %}
+            <span class="current">
+                Page {{ animal_list.number }} sur {{ animal_list.paginator.num_pages }}
+            </span>
+            {% if animal_list.has_next %}
+                <a href="?{% param_replace page=animal_list.next_page_number %}">Suivante</a>
+            {% endif %}
+
+        </div>
+
+    </div>
+
+
+
+
+
+
+
+
+
+{% endblock %}

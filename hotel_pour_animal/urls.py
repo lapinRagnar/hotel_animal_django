@@ -4,8 +4,7 @@ from django.views.generic import DetailView
 
 from hotel_pour_animal.models.personne import Personne
 
-from .views import home, personne
-
+from .views import home, personne, animal
 
 urlpatterns = [
     # path('', home.index, name='home'),
@@ -17,7 +16,8 @@ urlpatterns = [
     path('personnes/<int:pk>/', login_required(DetailView.as_view(
         model=Personne,
         template_name="hotel_pour_animal/personne/personne_detail.html"
-    )), name='detail_personne')
+    )), name='detail_personne'),
 
-
+    # animaux
+    path('animaux', animal.animal_list, name='animaux'),
 ]

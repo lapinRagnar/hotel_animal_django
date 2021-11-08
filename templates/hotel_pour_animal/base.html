@@ -17,16 +17,33 @@
   <div class="flex-child-element premier">
     <nav>
       <ul>
+
         <h2>Hotel privé pour animal</h2>
-        <li><a href="{% url 'home' %}">Home</a></li>
+
+        <li class="{% if selected == 'home' %}active{% endif %}">
+            <a href="{% url 'home' %}">Home</a>
+        </li>
+
         <li><a href="">Tableau de bord</a></li>
+
         <h2>GESTION</h2>
-        <li><span>Animaux</span></li>
-        <li><span><a href="{% url 'personnes' %}">Personnes</a></span></li>
-        <li><span>Séjours</span></li>
+
+        <li class="{% if selected == 'animaux' %}active{% endif %}">
+            <a href="{% url 'animaux' %}">Animaux</a>
+        </li>
+
+        <li class="{% if selected == 'personnes' %}active{% endif %}">
+            <a href="{% url 'personnes' %}">Personnes</a>
+        </li>
+
+        <li>Séjours</li>
+
         <h2>MON COMPTE</h2>
+
         <li><a href="{% url 'logout' %}">Déconnexion</a></li>
+
         <li><a href="{% url 'password_change' %}">Modifier mot de passe</a></li>
+
       </ul>
     </nav>
   </div>
