@@ -1,9 +1,30 @@
 {% extends 'hotel_pour_animal/base.html' %}
+{% load tag %}
 {% load static %}
 
 
 {% block content %}
     <h1 class="titre_tableau_de_bord">TABLEAU DE BORD</h1>
+
+    <div class="row p-4">
+        <div class="col-sm-12 mt-3">
+            <div class="card">
+                <div class="card-header">
+                    Recherche
+                </div>
+                <form action="{% url 'personnes' %}" method="post">
+                    <div class="card-body">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <div class="text-right">
+                            <button class="btn btn-info" type="submit" >Rechercher</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
     <table>
       <tr>
         <th scope="col">Nom</th>
@@ -27,7 +48,7 @@
 
     <div class="pagination">
         {% if personne_list.has_previous %}
-            <a href="{% url 'personnes'%}?page={{ personne_list.previous_page_number }} ">Précedente</a>
+            <a href="?{% param_replace page=personne_list.previous_page_number %} ">Précedente</a>
         {% endif %}
 
         <span class="current">
@@ -35,7 +56,7 @@
         </span>
 
         {% if personne_list.has_next %}
-            <a href="{% url 'personnes' %}?page={{ personne_list.next_page_number }}">Suivante</a>
+            <a href="?{% param_replace page=personne_list.next_page_number %}">Suivante</a>
         {% endif %}
 
     </div>

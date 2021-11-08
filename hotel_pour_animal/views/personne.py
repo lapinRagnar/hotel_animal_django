@@ -1,14 +1,14 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.paginator import Paginator, EmptyPage
-from django.shortcuts import render
-from django.urls import reverse_lazy
+from django.shortcuts import render, redirect
+
+from django.urls import reverse_lazy, reverse
+from django.utils.http import urlencode
 from django.views.generic import CreateView, UpdateView
 
 from hotel_pour_animal.models.personne import Personne
-from hotel_pour_animal.forms.personne import PersonneForm
-
-
+from hotel_pour_animal.forms.personne import PersonneForm, PersonneSearchForm
 
 
 @login_required
@@ -16,6 +16,27 @@ def personne_list(request):
     selected = 'personnes'
     personne_list = Personne.objects.all()
 
+    if request.method == 'POST':
+        form = PersonneSearchForm(request.POST)
+        if form.is_valid():
+            base_url = reverse('personnes')
+            query_string = urlencode(form.cleaned_data)
+            url = '{}?{}'.format(base_url, query_string)
+            return redirect(url)
+    else:
+        form = PersonneSearchForm()
+        nom_form = request.GET.get('nom', '')
+        prenom_form = request.GET.get('prenom', '')
+        email_form = request.GET.get('email', '')
+        if nom_form is not None:
+            personne_list = personne_list.filter(nom__icontains=nom_form)
+            form.fields['nom'].initial = nom_form
+        if prenom_form is not None:
+            personne_list = personne_list.filter(prenom__icontains=prenom_form)
+            form.fields['prenom'].initial = prenom_form
+        if email_form is not None:
+            personne_list = personne_list.filter(email__icontains=email_form)
+            form.fields['email'].initial = email_form
 
     # pagination - 10 éléments par page
     paginator = Paginator(personne_list.order_by('-date_mise_a_jour'), 10)
