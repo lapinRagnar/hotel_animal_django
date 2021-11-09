@@ -7,8 +7,11 @@ from django.urls import reverse_lazy, reverse
 from django.utils.http import urlencode
 from django.views.generic import CreateView, UpdateView
 
+
 from hotel_pour_animal.models.personne import Personne
 from hotel_pour_animal.forms.personne import PersonneForm, PersonneSearchForm
+
+from dal import autocomplete
 
 
 @login_required
@@ -73,3 +76,15 @@ class UpdatePerson(UpdateView, LoginRequiredMixin):
         return reverse_lazy('detail_personne', kwargs={'pk': self.object.id})
 
 
+class PersonneAutocomplete(autocomplete.Select2QuerySetView):
+    def get_queryset(self):
+        # Don't forget to filter out results depending on the visitor !
+        if not self.request.user.is_authenticated:
+            return Personne.objects.none()
+
+        qs = Personne.objects.all()
+
+        if self.q:
+            qs = qs.filter(name__istartswith=self.q)
+
+        return qs

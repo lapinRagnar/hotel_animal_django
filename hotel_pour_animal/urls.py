@@ -5,6 +5,7 @@ from django.views.generic import DetailView
 from hotel_pour_animal.models.personne import Personne
 
 from .views import home, personne, animal
+from .views.personne import PersonneAutocomplete
 
 urlpatterns = [
     # path('', home.index, name='home'),
@@ -17,7 +18,10 @@ urlpatterns = [
         model=Personne,
         template_name="hotel_pour_animal/personne/personne_detail.html"
     )), name='detail_personne'),
+    path('personnes/autocomplete/', login_required(PersonneAutocomplete.as_view()), name='personne_autocomplete'),
 
     # animaux
     path('animaux', animal.animal_list, name='animaux'),
+    path('animaux/create', animal.CreateAnimal.as_view(), name='create_animal'),
+
 ]

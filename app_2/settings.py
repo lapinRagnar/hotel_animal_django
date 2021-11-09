@@ -33,7 +33,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
+
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -42,6 +42,11 @@ INSTALLED_APPS = [
 
     'hotel_pour_animal',
     'import_export',
+    'dal',
+    'dal_select2',
+
+    'django.contrib.admin',
+
 ]
 
 MIDDLEWARE = [

@@ -1,7 +1,11 @@
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.paginator import Paginator, EmptyPage
 from django.shortcuts import render
+from django.urls import reverse_lazy
+from django.views.generic import CreateView
 
+from hotel_pour_animal.forms.animal import AnimalCreateForm
 from hotel_pour_animal.models.animal import Animal
 
 
@@ -20,5 +24,14 @@ def animal_list(request):
         personnes = paginator.page(paginator.num_pages())
 
     return render(request, "hotel_pour_animal/animal/animal_list.html", locals())
+
+
+class CreateAnimal(LoginRequiredMixin, CreateView):
+    model = Animal
+    form_class = AnimalCreateForm
+    template_name = 'hotel_pour_animal/animal/animal_form.html'
+
+    def get_success_url(self):
+        return reverse_lazy('animaux')
 
 
