@@ -1,4 +1,5 @@
 from django.forms import ModelForm
+from django import forms
 
 from hotel_pour_animal.models.animal import OuiNonChoice, EmplacementChoice, Animal
 
@@ -56,6 +57,10 @@ class AnimalBaseForm:
         return cleaned_data
 
 
+class DateInput(forms.DateInput):
+    input_type = 'date'
+
+
 class AnimalCreateForm(AnimalBaseForm, ModelForm):
     required_css_class = 'required'
     class Meta:
@@ -74,16 +79,21 @@ class AnimalCreateForm(AnimalBaseForm, ModelForm):
             'date_dernier_vaccin',
             'proprietaire',
         )
+        widgets = {
+            'date_naissance': DateInput(),
+            'date_arrivee': DateInput(),
+            'date_sterilisation': DateInput(),
+            'date_dernier_vaccin': DateInput(),
+        }
         # widgets = {
         #     'proprietaire': autocomplete.ModelSelect2(url='personne_autocomplete'),
         # }
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.fields['date_naissance'].widget.attrs['class'] = 'datePicker'
-        self.fields['date_arrivee'].widget.attrs['class'] = 'datePicker'
-        self.fields['date_sterilisation'].widget.attrs['class'] = 'datePicker'
-        self.fields['date_dernier_vaccin'].widget.attrs['class'] = 'datePicker'
-
+    # def __init__(self, *args, **kwargs):
+    #     super().__init__(*args, **kwargs)
+    #     self.fields['date_naissance'].widget.attrs['class'] = 'datePicker'
+    #     self.fields['date_arrivee'].widget.attrs['class'] = 'datePicker'
+    #     self.fields['date_sterilisation'].widget.attrs['class'] = 'datePicker'
+    #     self.fields['date_dernier_vaccin'].widget.attrs['class'] = 'datePicker'
 
 

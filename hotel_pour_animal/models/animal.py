@@ -9,6 +9,7 @@ class TypeAnimalChoice(Enum):
     LAPIN = 'Lapin'
     CHINCHILLA = 'Chinchilla'
     COCHON_DINDE = "Cochon d'inde"
+    CHAT = 'Chat'
 
 
 class SexeChoice(Enum):
